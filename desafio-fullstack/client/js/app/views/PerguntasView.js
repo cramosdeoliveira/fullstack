@@ -17,9 +17,9 @@ class PerguntasView extends View {
       </thead>
     
       <tbody>      
-        ${model.perguntas.map(n => `          
-          <tr data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor:pointer">
-            <td>${n.titulo}</td>             
+        ${model.perguntas.map(n => `              
+          <tr data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor:pointer" onclick="document.querySelector('#staticBackdropLabel').textContent = '${n.titulo}'">
+            <td>${n.titulo}</td>       
           </tr>
           `).join('')}
       </tbody>

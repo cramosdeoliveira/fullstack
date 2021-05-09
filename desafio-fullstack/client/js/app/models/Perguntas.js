@@ -6,7 +6,6 @@ class Perguntas {
 
   get titulo(){
     return this._titulo
-  }
-  
+  } 
   
 }

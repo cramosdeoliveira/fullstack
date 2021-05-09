@@ -3,23 +3,6 @@ var campos = [
   document.querySelector('#titulo')
 ]
 
-var tbody = document.querySelector('table tbody')
-
-document.querySelector('.form').addEventListener('submit', event => {
-  event.preventDefault()
-  var tr = document.querySelector('tr')
-  
-  campos.forEach( campo => {
-    var td = document.querySelector('td')
-    td.textContent = campo.value
-    tr.appendChild(td)
-  })
-
-  campos[0].value = ''
-  campos[1].value = ''
-  campos[0].focus()
-})
-
 var perguntas = [
   document.querySelector('#pergunta1'),
   document.querySelector('#pergunta2'),

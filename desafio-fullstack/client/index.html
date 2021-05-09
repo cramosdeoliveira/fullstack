@@ -25,8 +25,7 @@
         <div class="form-group">
             <label for="quantidade">Titulo do Questionário</label>
             <input type="text" id="titulo" class="form-control" required placeholder="Insira o título do questionário"/>
-        </div>     
-        
+        </div>
         
         <button class="btn btn-primary" type="submit">Incluir</button>
     </form>
@@ -35,7 +34,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">            
-            <h5 class="modal-title" id="staticBackdropLabel" data-biding="modal-title">Faça suas perguntas</h5>
+            <h5 class="modal-title" id="staticBackdropLabel" data-biding="modal-title"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -79,10 +78,11 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Responda as perguntas</h5>
+            
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="form perguntas" onsubmit="">
+            <form class="form perguntas" onsubmit="questionarioController.adicionaResposta(event)">
               <div class="form-group">
                   <label for="pergunta1">Resposta 1</label>
                   <input type="text"  class="form-control" required autofocus placeholder="Insira sua pergunta" id="resposta1"/>        
@@ -120,19 +120,21 @@
     
    <div id="questionarioView"></div>
    <div id="perguntasView"></div>
+   <div id="respostasView"></div>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/app/models/Questionario.js"></script>
     <script src="/js/app/controllers/QuestionarioController.js"></script>
     <script src="/js/app/models/ListaQuestionario.js"></script>
     <script src="/js/app/models/Perguntas.js"></script>
     <script src="/js/app/models/ListaPerguntas.js"></script>
+    <script src="/js/app/models/Respostas.js"></script>
+    <script src="/js/app/models/ListaRespostas.js"></script>
     <script src="/js/app/views/View.js"></script>
     <script src="/js/app/views/QuestionariosView.js"></script>    
     <script src="/js/app/models/Mensagem.js"></script>
     <script src="/js/app/views/MensagemView.js"></script>
     <script src="/js/app/views/PerguntasView.js"></script>
-    <script src="/js/app/models/TituloModal.js"></script>
-    <script src="/js/app/views/TituloModalView.js"></script>
+    <script src="/js/app/views/RespostaView.js"></script>    
     <script src="/js/app/index.js"></script>
     <script>
       let questionarioController = new QuestionarioController()

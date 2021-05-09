@@ -4,7 +4,7 @@ class Respostas {
     this._resposta = resposta
   }
 
-  get titulo(){
+  get resposta(){
     return this._resposta
   }
   

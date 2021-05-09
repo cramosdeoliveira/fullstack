@@ -13,7 +13,7 @@ class QuestionarioController {
         if (['adiciona', 'esvazia'].includes(prop) && typeof (target[prop] == typeof (Function))) {
           return function() { 
             Reflect.apply(target[prop], target, arguments)
-            self._questionarioView.update(target)
+            self._questionarioView.update(target)            
           }        
         }
         return Reflect.get(target, prop, receiver)
@@ -33,25 +33,43 @@ class QuestionarioController {
       }
     })
 
+    this._listaRespostas = new Proxy(new ListaRespostas(), {
+      get(target, prop, receiver) {
+        if (['adicionaResposta', 'esvazia'].includes(prop) && typeof (target[prop] == typeof (Function))) {
+          return function() { 
+            Reflect.apply(target[prop], target, arguments)
+            self._respostaView.update(target)
+          }        
+        }
+        return Reflect.get(target, prop, receiver)
+      }
+    })
+
     this._questionarioView = new QuestionariosView($('#questionarioView'))
     this._questionarioView.update(this._listaQuestionario)
+
     this._perguntasView = new PerguntasView(document.querySelector('#perguntasView'))
     this._perguntasView.update(this._listaPerguntas)
+
+    this._respostaView = new RespostasView($('#respostasView'))
+    this._respostaView.update(this._listaRespostas)
     
 
     this._mensagem = new Mensagem()
     this._mensagemView = new MensagemView($('#mensagemView'))
     this._mensagemView.update(this._mensagem)
+    
   }
 
   adiciona(event) {
     event.preventDefault()
 
     this._listaQuestionario.adiciona(this._criaQuestionario())
-    console.log(this._listaQuestionario);
+    //console.log(this._listaQuestionario._questionarios[0].nome);
     this._mensagem.texto = 'Questionário adicionado com sucesso!'
     this._mensagemView.update(this._mensagem)
-    this.limpaQuestionario()
+    
+    this._limpaQuestionario()
     
   }
 
@@ -61,7 +79,7 @@ class QuestionarioController {
       )
   }
 
-  limpaQuestionario() {
+  _limpaQuestionario() {
     this._inputNome.value = ''
     this._inputTitulo.value = ''
 
@@ -81,15 +99,9 @@ class QuestionarioController {
     
     this._listaPerguntas.adicionaPergunta(this._criaPerguntas())
     this._mensagem.texto = 'Perguntas adicionadas com sucesso!'
-    this._mensagemView.update(this._mensagem)
+    this._mensagemView.update(this._mensagem)    
 
-    console.log(valoresInputPerguntas[0].value)
-    console.log(valoresInputPerguntas[1].value)
-    console.log(valoresInputPerguntas[2].value)
-    console.log(valoresInputPerguntas[3].value)
-    console.log(valoresInputPerguntas[4].value)
-
-    this.limpaPerguntas()
+    this._limpaPerguntas()
     
   }
 
@@ -103,7 +115,7 @@ class QuestionarioController {
       )
   }
 
-  limpaPerguntas() {
+  _limpaPerguntas() {
     this._inputPergunta1.value = ''
     this._inputPergunta2.value = ''
     this._inputPergunta3.value = ''
@@ -124,12 +136,33 @@ class QuestionarioController {
       this._inputResposta5 = document.querySelector('#resposta5')
     ]
 
-    console.log(valoresInputRespostas[0].value)
-    console.log(valoresInputRespostas[1].value)
-    console.log(valoresInputRespostas[2].value)
-    console.log(valoresInputRespostas[3].value)
-    console.log(valoresInputRespostas[4].value)
+    this._listaRespostas.adicionaRespostas(this._criaRespostas())
+    this._mensagem.texto = 'Respostas salvas com sucesso!'
+    this._mensagemView.update(this._mensagem)    
+
+    this._limpaRespostas()    
   }
 
+  _criaRespostas() {
+    return new Respostas(
+      this._inputResposta1.value,
+      this._inputResposta2.value,
+      this._inputResposta3.value,
+      this._inputResposta4.value,
+      this._inputResposta5.value
+    )
+  }
+
+  _limpaRespostas() {
+    this._inputResposta1.value = '',
+      this._inputResposta2.value = '',
+      this._inputResposta3.value = '',
+      this._inputResposta4.value = '',
+      this._inputResposta5.value = ''
+
+    this._inputResposta1.focus()
+  }
+
+  
  
 }

@@ -20,13 +20,13 @@ class QuestionariosView extends View {
       
         <tbody>
           ${model.questionarios.map(n => `
-            <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor:pointer">
+            <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor:pointer" onclick="document.querySelector('#staticBackdropLabel').textContent = 'QUESTIONÁRIO: ${n.titulo}'">
               <td>${n.nome}</td>
-              <td>${n.titulo}</td>
+              <td class="quiz-title">${n.titulo}</td>
             </tr>
             `).join('')}
         </tbody>
-      </table>        
+      </table> 
       `  
     
   }
