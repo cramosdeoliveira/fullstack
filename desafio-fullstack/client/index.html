@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="origin">
+  <title>FullStack</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="container">
+  
+  
+
+  <h1 class="text-center">Crie seu Questionário</h1>
+
+    <div id="mensagemView"></div>
+
+    <form class="form" onsubmit="questionarioController.adiciona(event)">
+        
+        <div class="form-group">
+            <label for="data">Nome</label>
+            <input type="text" id="nome" class="form-control" required autofocus placeholder="Insira seu nome"/>        
+        </div>    
+        
+        <div class="form-group">
+            <label for="quantidade">Titulo do Questionário</label>
+            <input type="text" id="titulo" class="form-control" required placeholder="Insira o título do questionário"/>
+        </div>     
+        
+        
+        <button class="btn btn-primary" type="submit">Incluir</button>
+    </form>
+
+    <div class="modal fade in" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">            
+            <h5 class="modal-title" id="staticBackdropLabel" data-biding="modal-title">Faça suas perguntas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          <form class="form perguntas" onsubmit="questionarioController.adicionaPergunta(event)">
+            <div class="form-group">
+                <label for="pergunta1">Pergunta 1</label>
+                <input type="text"  class="form-control" required autofocus placeholder="Insira sua pergunta" id="pergunta1"/>        
+            </div>    
+            
+            <div class="form-group">
+                <label for="pergunta2">Pergunta 2</label>
+                <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="pergunta2"/>        
+            </div>
+
+            <div class="form-group">
+                <label for="pergunta3">Pergunta 3</label>
+                <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="pergunta3"/>        
+            </div>
+
+            <div class="form-group">
+                <label for="pergunta4">Pergunta 4</label>
+                <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="pergunta4"/>        
+            </div>
+
+            <div class="form-group">
+                <label for="pergunta5">Pergunta 5</label>
+                <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="pergunta5"/>      
+            </div>
+          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" onclick="questionarioController.adicionaPergunta(event)">Salvar perguntas</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade in" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Responda as perguntas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="form perguntas" onsubmit="">
+              <div class="form-group">
+                  <label for="pergunta1">Resposta 1</label>
+                  <input type="text"  class="form-control" required autofocus placeholder="Insira sua pergunta" id="resposta1"/>        
+              </div>    
+              
+              <div class="form-group">
+                  <label for="pergunta2">Resposta 2</label>
+                  <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="resposta2"/>        
+              </div>
+  
+              <div class="form-group">
+                  <label for="pergunta3">Resposta 3</label>
+                  <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="resposta3"/>        
+              </div>
+  
+              <div class="form-group">
+                  <label for="pergunta4">Resposta 4</label>
+                  <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="resposta4"/>        
+              </div>
+  
+              <div class="form-group">
+                  <label for="pergunta5">Resposta 5</label>
+                  <input type="text"  class="form-control" required placeholder="Insira sua pergunta" id="resposta5"/>      
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Salvar Respostas</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+   <div id="questionarioView"></div>
+   <div id="perguntasView"></div>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/app/models/Questionario.js"></script>
+    <script src="/js/app/controllers/QuestionarioController.js"></script>
+    <script src="/js/app/models/ListaQuestionario.js"></script>
+    <script src="/js/app/models/Perguntas.js"></script>
+    <script src="/js/app/models/ListaPerguntas.js"></script>
+    <script src="/js/app/views/View.js"></script>
+    <script src="/js/app/views/QuestionariosView.js"></script>    
+    <script src="/js/app/models/Mensagem.js"></script>
+    <script src="/js/app/views/MensagemView.js"></script>
+    <script src="/js/app/views/PerguntasView.js"></script>
+    <script src="/js/app/models/TituloModal.js"></script>
+    <script src="/js/app/views/TituloModalView.js"></script>
+    <script src="/js/app/index.js"></script>
+    <script>
+      let questionarioController = new QuestionarioController()
+    </script>
+</body>
+</html>
